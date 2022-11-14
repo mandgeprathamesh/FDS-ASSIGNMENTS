@@ -1,0 +1,92 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+struct node{
+    char name[50];
+    int roll;
+    struct node* next;
+    
+};
+struct node* head=NULL;
+void createnode(){
+    struct node* newnode,*temp;
+    temp=head;
+    newnode=(struct node*)malloc(sizeof(struct node));
+    printf("enter the name:\n");
+    scanf("%s",newnode->name);
+    printf("enter the roll:\n");
+    scanf("%d",&newnode->roll);
+    newnode->next=NULL;
+    while(temp->next!=NULL){
+        temp=temp->next;
+    }
+    temp->next=newnode;
+    //temp=newnode;
+    printf("successfully created\n");
+}
+void deletelist(){
+    struct node* temp,*back;
+    temp=head->next;
+    back=head;
+    char stuname[20];
+    printf("enter the name of student :\n");
+    scanf("%s",stuname);
+    while((strcmp(temp->name,stuname))&&temp->next!=NULL){
+        back=temp;
+        temp=temp->next;
+    }
+    if(temp->next==NULL){
+        printf("Student not present\n");
+    }
+    else{
+        back->next=temp->next;
+        free(temp);
+        printf("Deleted successfully\n");
+    }
+}
+void countlist(){
+    struct node* temp;
+    temp=head;
+    int count=0;
+    while(temp!=NULL){
+        count++;
+        temp=temp->next;
+    }
+    printf("total students are:%d\n",count);
+}
+void displaylist(){
+    struct node*temp;
+    temp=head;
+    while(temp!=NULL){
+        printf("%s %d \n",temp->name,temp->roll);
+        temp=temp->next;
+    }
+}
+void main(){
+    int ch;
+    printf("enter the name of first student:\n");
+    head=(struct node*)malloc(sizeof(struct node));
+    scanf("%s",head->name);
+    printf("enter the roll:\n");
+    scanf("%d",&head->roll);
+    head->next=NULL;
+    while(1){
+        printf("1:to add students\n2:to delete student\n3:to count students\n4:to display list\n");
+        scanf("%d",&ch);
+        switch(ch){
+            case 1:
+                createnode();
+                break;
+            case 2:
+                displaylist();
+                deletelist();
+                break;
+            case 3:
+                countlist();
+                break;
+            case 4:
+                displaylist();
+                break;
+        }
+    }
+}
