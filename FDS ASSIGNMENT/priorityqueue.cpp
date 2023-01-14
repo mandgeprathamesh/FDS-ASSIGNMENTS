@@ -2,7 +2,7 @@
 using namespace std;
 class queue{
     private:
-    int q[3];
+    int q[5];
     int front;
     int rear;
     int size;
@@ -10,7 +10,7 @@ class queue{
     queue(){
         rear=-1;
         front=-1;
-        size=3;
+        size=5;
     }
     void enqueue(){
         int x,i,j;
@@ -28,12 +28,16 @@ class queue{
                 if(x>q[i]){
                     j=i;
                     break;
+                }
             }
-        }
-        for(j;j<=rear;j++){
-            q[i+1]=q[i];
-        }
-            q[j]=x;
+            
+            for(j ;j<=rear;j++){
+                q[j+1]=q[j];
+            }
+            q[i]=x;
+            rear++;
+            cout<<rear;
+            cout<<front;
         }
     }
     void dequeue(){
@@ -54,10 +58,10 @@ class queue{
             cout<<"queue is empty\n";
         }
         else{
-        for(int i=front;i<=rear;i++){
-            cout<<q[i]<<" ";
-        }
-        cout<<endl;
+            for(int i=front;i<=rear;i++){
+                cout<<q[i]<<" ";
+            }
+            cout<<endl;
         }
     }
 
